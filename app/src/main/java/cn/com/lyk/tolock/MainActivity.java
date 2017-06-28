@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏
+
         //检查如果我们运行在Android 5.0或更高版本
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (!hasPermission()) {
