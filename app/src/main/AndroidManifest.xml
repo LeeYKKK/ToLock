@@ -10,7 +10,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -24,13 +24,21 @@
         </activity>
 
         <service
-            android:name="cn.com.lyk.service.DetectorService1"
+            android:name="cn.com.lyk.service.DetectorService"
             android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name="cn.com.lyk.service.DetectorService2"
-            android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true">
+            <intent-filter android:priority="1000">
+                <action android:name="com.system.detector" />
+            </intent-filter>
+        </service>
+        <receiver android:name="cn.com.lyk.service.DetectorBroadcastReceiver">
+            <intent-filter >
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.USER_PRESENT"/>
+                <action android:name="cn.com.lyk.detector"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

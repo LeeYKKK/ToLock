@@ -6,11 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 
-import cn.com.lyk.service.DetectorService1;
+import cn.com.lyk.service.DetectorService;
 
 public class MainActivity extends Activity {
     private static final int MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 1101;
@@ -28,7 +27,7 @@ public class MainActivity extends Activity {
                         MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
             }
         }
-        Intent intent=new Intent(MainActivity.this,DetectorService1.class);
+        Intent intent=new Intent(MainActivity.this,DetectorService.class);
         startService(intent);
     }
 
