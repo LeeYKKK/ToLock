@@ -7,17 +7,18 @@ import android.content.Intent;
 import android.os.Build;
 import android.provider.Settings;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 import cn.com.lyk.service.DetectorService;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 1101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏
+
         setContentView(R.layout.activity_main);
         //检查如果我们运行在Android 5.0或更高版本
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
