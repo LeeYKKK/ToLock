@@ -1,1 +1,1 @@
-include ':app', ':deamon'
+include ':app'

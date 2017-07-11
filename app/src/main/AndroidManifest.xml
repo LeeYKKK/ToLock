@@ -15,10 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="cn.com.lyk.tolock.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <data android:host=".MainActivity" android:scheme="cn.com.lyk.tolock" />
+                //不在桌面显示
+                <!--<data android:host=".MainActivity" android:scheme="cn.com.lyk.tolock" />-->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
