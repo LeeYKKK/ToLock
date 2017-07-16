@@ -7,19 +7,23 @@
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="cn.com.lyk.tolock.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 //不在桌面显示
-                <!--<data android:host=".MainActivity" android:scheme="cn.com.lyk.tolock" />-->
+                 <!--<data android:host=".MainActivity" android:scheme="cn.com.lyk.tolock" /> -->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -32,14 +36,55 @@
                 <action android:name="com.system.detector" />
             </intent-filter>
         </service>
+
         <receiver android:name="cn.com.lyk.service.DetectorBroadcastReceiver">
-            <intent-filter >
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.USER_PRESENT"/>
-                <action android:name="cn.com.lyk.detector"/>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="cn.com.lyk.detector" />
             </intent-filter>
         </receiver>
 
+        <service android:name="cn.com.lyk.base.AbsWorkService$WorkNotificationService" />
+        <service
+            android:name="cn.com.lyk.base.WatchDogService"
+            android:enabled="false"
+            android:exported="false" />
+        <service
+            android:name="cn.com.lyk.base.JobSchedulerService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":watch"/>
+
+        <service android:name="cn.com.lyk.service.TraceServiceImpl" />
+        <service
+            android:name="cn.com.lyk.base.WatchDogService$WatchDogNotificationService"
+            android:process=":watch" />
+        <receiver android:name="cn.com.lyk.base.WakeUpReceiver"
+            android:process=":watch">
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="cn.com.lyk.base.CANCEL_JOB_ALARM_SUB" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="cn.com.lyk.base.WakeUpReceiver$WakeUpAutoStartReceiver"
+            android:process=":watch">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
